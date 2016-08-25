@@ -1,4 +1,12 @@
 source https://www.nuget.org/api/v2
+nuget Microsoft.AspNet.WebApi.Core
+nuget Microsoft.AspNet.WebApi.OwinSelfHost
+nuget Microsoft.AspNet.WebApi.SelfHost
+nuget Microsoft.Owin.Testing
+nuget Newtonsoft.Json
 nuget NFluent
 nuget SpecFlow
 nuget Specflow.NCrunch
+nuget SpecFlow.xUnit
+nuget xunit
+nuget xunit.runner.visualstudio

@@ -1,3 +1,9 @@
 SpecFlow
 Specflow.NCrunch
 NFluent
+xunit
+xunit.runner.visualstudio
+SpecFlow.xUnit
+Microsoft.Owin.Testing
+Microsoft.AspNet.WebApi.OwinSelfHost
+Newtonsoft.Json

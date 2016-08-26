@@ -17,5 +17,10 @@ namespace Data
         {
             return this._rooms;
         }
+
+        public Room GetRoom(Name name)
+        {
+            return this._rooms.FirstOrDefault(a => a.Name == name);
+        }
     }
 }

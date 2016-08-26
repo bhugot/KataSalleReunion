@@ -23,22 +23,22 @@ namespace Specs
         }
     }
 
-    public class TestControllerActivator  : IHttpControllerActivator
+    public class TestControllerActivator : IHttpControllerActivator
     {
         private readonly IHttpControllerActivator _decorated;
         private readonly Func<IRooms> _roomsRepositoryFactory;
 
-        public TestControllerActivator(IHttpControllerActivator  decorated, Func<IRooms> roomsRepositoryFactory)
+        public TestControllerActivator(IHttpControllerActivator decorated, Func<IRooms> roomsRepositoryFactory)
         {
             this._decorated = decorated;
             this._roomsRepositoryFactory = roomsRepositoryFactory;
         }
-        public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
+
+        public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor,
+            Type controllerType)
         {
-            if (controllerType ==  typeof(RoomsController))
-            {
-                return new RoomsController(_roomsRepositoryFactory());
-            }
+            if (controllerType == typeof(RoomsController))
+                return new RoomsController(this._roomsRepositoryFactory());
             return this._decorated.Create(request, controllerDescriptor, controllerType);
         }
     }

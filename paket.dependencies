@@ -8,5 +8,7 @@ nuget NFluent
 nuget SpecFlow
 nuget Specflow.NCrunch
 nuget SpecFlow.xUnit
+nuget Swashbuckle
+nuget Swashbuckle.Core.Net45
 nuget xunit
 nuget xunit.runner.visualstudio

@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\HourExtensions.cs" />
+    <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Models\RoomViewModel.cs" />
+    <Compile Include="Models\SlotViewModel.cs" />
+    <Compile Include="Models\UnbookViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

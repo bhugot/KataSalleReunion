@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\RoomBooking.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoomBooking.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\GetRooms.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -55,6 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\RoomBooking.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RoomBooking.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\GetRooms.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetRooms.feature.cs</LastGenOutput>

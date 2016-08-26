@@ -14,7 +14,8 @@ namespace Specs
         {
             var config = new HttpConfiguration();
             config.Services.Replace(typeof(IAssembliesResolver), new TestAssemblyResolver());
-            config.Services.Replace(typeof(IHttpControllerActivator), new TestControllerActivator(new DefaultHttpControllerActivator(), Factory));
+            config.Services.Replace(typeof(IHttpControllerActivator),
+                new TestControllerActivator(new DefaultHttpControllerActivator(), Factory));
             config.MapHttpAttributeRoutes();
             appBuilder.UseWebApi(config);
         }

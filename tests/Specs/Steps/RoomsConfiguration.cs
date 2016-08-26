@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Api.Models;
 using Domain;
 using TechTalk.SpecFlow;
@@ -18,10 +15,16 @@ namespace Specs.Steps
         {
             this._context = context;
         }
+
         [Given("I have all the following rooms:")]
         public void GivenIHaveEnteredSomethingIntoTheCalculator(Table roomsTable)
         {
-            this._context.InitializeRooms(roomsTable.CreateSet<RoomViewModel>().Select(a => new Room(a.Name)));
+            this._context.InitializeRooms(roomsTable.CreateSet<RoomViewModel>().Select(a => new Room(new Name(a.Name))));
+        }
+
+        [Given("their is no previous registration")]
+        public void NothingRegistered()
+        {
         }
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="Reservations.cs" />
     <Compile Include="Core\Result.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="RoomDayReservation.cs" />
     <Compile Include="TimeSlot.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Core\ValueObject.cs" />

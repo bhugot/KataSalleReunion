@@ -24,19 +24,9 @@ namespace Domain
             return this._slot.Contains(date);
         }
 
-        public TimeSlot NextSlot()
+        public IEnumerable<TimeSlot> GetOneHourSlots()
         {
-            return this._slot.NextSlot();
-        }
-
-        public bool CloseTheDay()
-        {
-            return this._slot.EndHour() == 24;
-        }
-
-        public IEnumerable<int> Hours()
-        {
-            return this._slot.Hours();
+            return this._slot.GetOneHourSlots();
         }
     }
 }

@@ -44,17 +44,6 @@ namespace Domain
             return (date >= this._startHour) && (date < this._endHour);
         }
 
-        public TimeSlot Increment()
-        {
-            return new TimeSlot(this._startHour, this._endHour.AddHours(1));
-        }
-
-        public TimeSlot NextSlot()
-        {
-            return new TimeSlot(this._endHour, this._endHour.AddHours(1));
-        }
-
-
         public int StartHour()
         {
             return this._startHour.Hour;
@@ -65,22 +54,17 @@ namespace Domain
             return this._endHour.Hour == 0 ? 24 : this._endHour.Hour;
         }
 
-        public TimeSlot ChangeEnd(int i)
-        {
-            return new TimeSlot(this._startHour, this._startHour.Date.AddHours(i));
-        }
-
-        public IEnumerable<int> Hours()
-        {
-            for (int i = 0; i < this._duration; i++)
-            {
-                yield return this._startHour.Hour + i;
-            }
-        }
-
         public static TimeSlot ForOneHour(DateTime startHour)
         {
             return new TimeSlot(startHour, startHour.AddHours(1));
+        }
+
+        public IEnumerable<TimeSlot> GetOneHourSlots()
+        {
+            for (int i = 0; i < this._duration; i++)
+            {
+                yield return TimeSlot.ForOneHour(this._startHour.AddHours(i));
+            }
         }
     }
 }

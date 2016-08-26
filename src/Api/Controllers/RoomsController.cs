@@ -19,18 +19,16 @@ namespace Api.Controllers
         {
             this._rooms = rooms;
         }
-
-        public RoomsController()
-            : this(new InMemoryRooms(Enumerable.Range(0, 10).Select(a => new Room(new Name($"room{a}")))))
-        {
-        }
-
+        
         [Route]
         public IHttpActionResult GetRooms()
         {
             try
             {
-                var rooms = this._rooms.GetAvailableRooms().Select(a => new RoomViewModel {Name = a.Name});
+                var rooms = this._rooms.GetAvailableRooms().Select(a => new RoomViewModel
+                {
+                    Name = a.Name,
+                });
 
                 return this.Ok(rooms);
             }
@@ -53,23 +51,13 @@ namespace Api.Controllers
                 var room = this._rooms.GetRoom(new Name(model.Room));
                 if (room == null) return this.NotFound();
                 var result = room.Book(new User(new Name(model.UserName)), new TimeSlot(model.Start, model.End));
-                if (result.IsInError)
-                {
-                    var slots =
+                if (!result.IsInError) return this.Ok();
+
+                var slots =
                     room.GetAvailableTimeSlot(model.Start)
-                        .Select(
-                            a =>
-                                new SlotViewModel
-                                {
-                                    Start = a.StartHour().ToDisplayHour(),
-                                    End = a.EndHour().ToDisplayHour()
-                                })
+                        .Select(CreateSlotViewModel)
                         .ToList();
-
-
-                    return this.Content(HttpStatusCode.Conflict, slots);
-                }
-                return this.Ok();
+               return this.Content(HttpStatusCode.Conflict, slots);
             }
             catch (Exception exception)
             {
@@ -77,9 +65,31 @@ namespace Api.Controllers
             }
         }
 
+        [Route("slots/{roomName}/{startDate}/free")]
+        [HttpPost]
+        public IHttpActionResult GetFreeSlots(string roomName, DateTime startDate)
+        {
+            var room = this._rooms.GetRoom(new Name(roomName));
+            if (room == null) return this.NotFound();
+
+            return this.Ok(room.GetAvailableTimeSlot(startDate)
+                        .Select(CreateSlotViewModel)
+                        .ToList());
+
+        }
+
+        private static SlotViewModel CreateSlotViewModel(TimeSlot a)
+        {
+            return new SlotViewModel
+            {
+                Start = a.StartHour().ToDisplayHour(),
+                End = a.EndHour().ToDisplayHour()
+            };
+        }
+
         [Route("unbook/{roomName}/{userName}/{startDate}")]
         [HttpDelete]
-        public IHttpActionResult DeleteRoom(string roomName, DateTime startDate)
+        public IHttpActionResult DeleteRoom(string roomName, string userName, DateTime startDate)
         {
             // I don't have control if reservation is at user name
             try

@@ -55,6 +55,14 @@
       <Project>{CECBAD25-5B55-416D-AD86-445B1E5C30FB}</Project>
       <Name>Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{2E9240BC-52FE-4344-9A96-68E1F1DCD48D}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{FA69ED94-0A30-46C4-98C3-0C47304ED38D}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

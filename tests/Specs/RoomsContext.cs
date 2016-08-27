@@ -87,7 +87,7 @@ namespace Specs
             };
             using (var client = new HttpClient(this._testServer.Handler))
             {
-                var uri = $"http://testserver/api/rooms/unbook/{room}/{user}/{startTime:O}";
+                var uri = $"http://testserver/api/rooms/{room}/unbook?startDate={startTime:O}";
                 var response = await client.DeleteAsync(uri).ConfigureAwait(false);
                 this.ResponseStatusCode = response.StatusCode;
             }

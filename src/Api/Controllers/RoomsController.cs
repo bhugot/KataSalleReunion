@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.Results;
 using Api.Extensions;
 using Api.Models;
@@ -21,6 +23,7 @@ namespace Api.Controllers
         }
         
         [Route]
+        [ResponseType(typeof(IEnumerable<RoomViewModel>))]
         public IHttpActionResult GetRooms()
         {
             try
@@ -40,7 +43,8 @@ namespace Api.Controllers
 
         [Route("booking")]
         [HttpPost]
-        public IHttpActionResult GetRooms([FromBody] ReservationViewModel model)
+        [ResponseType(typeof(IEnumerable<SlotViewModel>))]
+        public IHttpActionResult Booking([FromBody] ReservationViewModel model)
         {
             if (!this.ModelState.IsValid)
                 return new InvalidModelStateResult(this.ModelState, this);
@@ -65,9 +69,10 @@ namespace Api.Controllers
             }
         }
 
-        [Route("slots/{roomName}/{startDate}/free")]
+        [Route("{roomName}/slots")]
+        [ResponseType(typeof(IEnumerable<SlotViewModel>))]
         [HttpPost]
-        public IHttpActionResult GetFreeSlots(string roomName, DateTime startDate)
+        public IHttpActionResult GetFreeSlots(string roomName,[FromUri] DateTime startDate)
         {
             var room = this._rooms.GetRoom(new Name(roomName));
             if (room == null) return this.NotFound();
@@ -87,9 +92,9 @@ namespace Api.Controllers
             };
         }
 
-        [Route("unbook/{roomName}/{userName}/{startDate}")]
+        [Route("{roomName}/unbook")]
         [HttpDelete]
-        public IHttpActionResult DeleteRoom(string roomName, string userName, DateTime startDate)
+        public IHttpActionResult Unbook(string roomName,[FromUri] DateTime startDate)
         {
             // I don't have control if reservation is at user name
             try

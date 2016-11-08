@@ -22,4 +22,4 @@ Pour simplifier au maximum l’exercice
 Le but de ce kata est de montrer
 * Votre approche de modélisation « restful » de cette API (url paths, status codes …)
 * Votre maitrise d’asp.net webapi (owin, etc.) – vous pouvez hoster dans IIS ou en self-hosted, peu importe
-* Bonus : incorporer https://www.nuget.org/packages/Swashbuckle/5.3.2 pour exposer le swagger de cette API et interagir avec dynamiquement (« try out »).
+* Bonus : incorporer https://www.nuget.org/packages/Swashbuckle/5.3.2 pour exposer le swagger de cette API et interagir avec dynamiquement (« try out »). essai
